@@ -1,0 +1,40 @@
+class Celsius:
+    def __get__(self, instance, owner):
+        return instance._celsius
+        
+    
+    def __set__(self, instance, value):
+        instance._celsius = value
+        instance._kelvin = value + 273.15
+        instance._fahrenheit = (value * 9/5) + 32
+
+class Kelvin:
+    def __get__(self, instance, owner):
+        return instance._kelvin
+    
+    def __set__(self, instance, value):
+        instance._kelvin = value
+        instance._celsius = value - 273.15
+        instance._fahrenheit = (value - 273.15) * 9/5 + 32
+        
+
+class Fahrenheit:
+    def __get__(self, instance, owner):
+        return instance._fahrenheit
+        
+    def __set__(self, instance, value):
+        instance._fahrenheit = value
+        instance._celsius = (value - 32) * 5/9
+        instance._kelvin = (value - 32) * 5/9 + 273.15
+
+class Temperature:
+    celsius = Celsius()
+    kelvin = Kelvin()
+    fahrenheit = Fahrenheit()
+    
+    def __init__(self):
+        self._celsius = None
+        self._kelvin = None
+        self._fahrenheit = None
+        
+    
